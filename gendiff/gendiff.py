@@ -1,5 +1,5 @@
 import argparse
-import json
+from gendiff import generate_diff
 
 def read_json(file_path):
     with open(file_path) as file:
@@ -19,12 +19,8 @@ def main():
     )
     args = parser.parse_args()
 
-    data1 = json.load(open(args.first_file))
-    data2 = json.load(open(args.second_file))
-
-    print("Данные из первого файла:", data1)
-    print("Данные из второго файла:", data2)
+    diff = generate_diff(args.first_file, args.second_file)
+    print(diff)
 
 if __name__ == "__main__":
     main()
-
