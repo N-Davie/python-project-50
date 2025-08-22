@@ -14,7 +14,7 @@ build-backend = "hatchling.build"
 packages = ["gendiff"]
 
 [project.scripts]
-gendiff = "gendiff:main"
+gendiff = "gendiff.gendiff:main"
 
 [tool.ruff]
 line-length = 80
