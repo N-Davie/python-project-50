@@ -4,4 +4,4 @@
 # Проект "Вычислитель отличий"
 ____
 
-![]https://asciinema.org/a/FFkyKJzzapw8wS3eZIl3xrTUZ
+Аскинема с определением разнницы в файлах json https://asciinema.org/a/FFkyKJzzapw8wS3eZIl3xrTUZ
