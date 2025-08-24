@@ -5,4 +5,4 @@
 ____
 
 Аскинема с определением разнницы в файлах json 
-[![asciicast](https://asciinema.org/a/FFkyKJzzapw8wS3eZIl3xrTUZ.svg)](https://asciinema.org/a/FFkyKJzzapw8wS3eZIl3xrTUZ)
+https://asciinema.org/a/FFkyKJzzapw8wS3eZIl3xrTUZ
