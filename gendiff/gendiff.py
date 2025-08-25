@@ -35,7 +35,7 @@ def generate_diff(file_path1, file_path2):
                     f"  + {key}: {json.dumps(data2[key], ensure_ascii=False)}"
                 )
 
-    return "{\n" + "\n".join(result_lines) + "\n"
+    return "{\n" + "\n".join(result_lines) + "\n}"
 
 
 def main():
