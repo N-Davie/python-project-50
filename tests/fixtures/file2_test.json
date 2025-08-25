@@ -2,7 +2,7 @@
   "name": "hermione",
   "age": 17,
   "school": "hogwards",
-  "best_friend": "books"
-  "faculty": "Griffindor"
+  "best_friend": "books",
+  "faculty": "Griffindor",
   "hobby": "help house elfs"
 }
