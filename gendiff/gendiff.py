@@ -2,13 +2,17 @@
 
 import argparse
 import json
+from load import load_data
 
 
 def generate_diff(file_path1, file_path2):
-    with open(file_path1) as f:
-        data1 = json.load(f)
-    with open(file_path2) as f:
-        data2 = json.load(f)
+    data1 = load_data(file_path1)
+    data2 = load_data(file_path2)
+
+    if not isinstance(data1, dict):
+        raise TypeError(f"Данные из файла {file_path1} должны быть словарем.")
+    if not isinstance(data2, dict):
+        raise TypeError(f"Данные из файла {file_path2} должны быть словарем.")
 
     keys = sorted(data1.keys() | data2.keys())
     result_lines = []
@@ -40,14 +44,17 @@ def generate_diff(file_path1, file_path2):
 
 def main():
     parser = argparse.ArgumentParser(
-        description='Compares two configuration files and shows a difference.'
+        description='Compare two configuration files and show a diff.'
     )
-    parser.add_argument('filepath1')
-    parser.add_argument('filepath2')
+    parser.add_argument('filepath1', help='Path to the first file')
+    parser.add_argument('filepath2', help='Path to the second file')
     args = parser.parse_args()
 
-    diff_result = generate_diff(args.filepath1, args.filepath2)
-    print(diff_result)
+    try:
+        diff_result = generate_diff(args.filepath1, args.filepath2)
+        print(diff_result)
+    except Exception as e:
+        print(f"Error: {e}")
 
 
 if __name__ == "__main__":
