@@ -2,7 +2,7 @@
 
 import argparse
 import json
-from load import load_data
+from .load import load_data
 
 
 def generate_diff(file_path1, file_path2):
