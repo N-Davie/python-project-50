@@ -13,7 +13,6 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-        # make depends on uv
       - name: Install dependencies
         run: |
           pip install uv
@@ -24,12 +23,15 @@ jobs:
       - name: Run test coverage
         run: |
           make test-coverage
+
       - name: SonarQubeScan
         uses: SonarSource/sonarqube-scan-action@v5
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         with:
           args: >
-            -Dsonar.projectKey=hexlet-boilerplates_python-package
-            -Dsonar.organization=hexlet-boilerplates
+            -Dsonar.projectKey=N-Davie_python-project-50
+            -Dsonar.organization=n-davie
             -Dsonar.python.coverage.reportPaths=coverage.xml
+            -Dsonar.coverage.exclusions=tests/**
+            -Dsonar.exclusions=tests/**

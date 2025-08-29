@@ -2,20 +2,29 @@ install:
 	uv sync
 
 run:
-	uv run hexlet-python-package
+	uv run gendiff
 
 test:
 	uv run pytest
 
 test-coverage:
-	uv run pytest --cov=hexlet_python_package --cov-report xml
+	uv run pytest --cov=gendiff --cov-report=xml:coverage.xml
 
 lint:
-	uv run ruff check
+	uv run ruff check gendiff
 
 check: test lint
 
 build:
 	uv build
 
-.PHONY: install test lint selfcheck check build
+package-install:
+	uv tool install dist/*.whl
+
+reinstall:
+	uv tool install --force dist/*.whl
+
+uninstall:
+	uv tool uninstall hexlet-code
+
+.PHONY: install test lint selfcheck check build package-install reinstall uninstall

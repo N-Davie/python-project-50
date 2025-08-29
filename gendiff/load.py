@@ -15,7 +15,8 @@ def load_data(file_path):
             if yaml is None:
                 raise ImportError("PyYAML не установлен.")
             return yaml.safe_load(f)
-        elif ext == '.json':
-            return json.load(f)
         else:
-            raise ValueError(f"Неподдерживаемый формат файла.")
+            if ext == '.json':
+                return json.load(f)
+            else:
+                raise ValueError(f"Неподдерживаемый тип файла: {ext}")
