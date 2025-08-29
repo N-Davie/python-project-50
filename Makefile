@@ -11,7 +11,7 @@ test-coverage:
 	uv run pytest --cov=gendiff --cov-report=xml:coverage.xml
 
 lint:
-	uv run ruff check gendiff
+	uv run ruff check gendiff --fix gendiff
 
 check: test lint
 
