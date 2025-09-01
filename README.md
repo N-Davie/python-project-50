@@ -12,3 +12,6 @@ https://asciinema.org/a/FFkyKJzzapw8wS3eZIl3xrTUZ
 
 Аскинема с определением разницы в файлах yaml
 https://asciinema.org/a/EqWGtrY3rQPNsej209zx6zNd3
+
+Аскинема с рекурсивным сравнением файлов json и yaml
+https://asciinema.org/a/uXKUwfREIRo0cm5a57HqbKQ7v

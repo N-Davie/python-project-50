@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 
 import argparse
-import json
 from .load import load_data
-
+from .diff_builder import build_diff
+from .formatters.stylish import format_diff_output
 
 def generate_diff(file_path1, file_path2):
     data1 = load_data(file_path1)
@@ -14,33 +14,8 @@ def generate_diff(file_path1, file_path2):
     if not isinstance(data2, dict):
         raise TypeError(f"Данные из файла {file_path2} должны быть словарем.")
 
-    keys = sorted(data1.keys() | data2.keys())
-    result_lines = []
-
-    for key in keys:
-        if key not in data1:
-            result_lines.append(
-                f"  + {key}: {json.dumps(data2[key], ensure_ascii=False)}"
-            )
-        elif key not in data2:
-            result_lines.append(
-                f"  - {key}: {json.dumps(data1[key], ensure_ascii=False)}"
-            )
-        else:
-            if data1[key] == data2[key]:
-                result_lines.append(
-                    f"    {key}: {json.dumps(data1[key], ensure_ascii=False)}"
-                )
-            else:
-                result_lines.append(
-                    f"  - {key}: {json.dumps(data1[key], ensure_ascii=False)}"
-                )
-                result_lines.append(
-                    f"  + {key}: {json.dumps(data2[key], ensure_ascii=False)}"
-                )
-
-    return "{\n" + "\n".join(result_lines) + "\n}"
-
+    diff_tree = build_diff(data1, data2)
+    return format_diff_output(diff_tree)
 
 def main():
     parser = argparse.ArgumentParser(
@@ -55,7 +30,6 @@ def main():
         print(diff_result)
     except Exception as e:
         print(f"Error: {e}")
-
 
 if __name__ == "__main__":
     main()
