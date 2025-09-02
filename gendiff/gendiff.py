@@ -3,9 +3,11 @@
 import argparse
 from .load import load_data
 from .diff_builder import build_diff
-from .formatters.stylish import format_diff_output
+from .formatters.stylish import format_diff_output as format_stylish
+from .formatters.plain import format_diff as format_plain
 
-def generate_diff(file_path1, file_path2):
+
+def generate_diff(file_path1, file_path2, format_name='stylish'):
     data1 = load_data(file_path1)
     data2 = load_data(file_path2)
 
@@ -15,7 +17,14 @@ def generate_diff(file_path1, file_path2):
         raise TypeError(f"Данные из файла {file_path2} должны быть словарем.")
 
     diff_tree = build_diff(data1, data2)
-    return format_diff_output(diff_tree)
+
+    if format_name == 'stylish':
+        return format_stylish(diff_tree)
+    elif format_name == 'plain':
+        return format_plain(diff_tree)
+    else:
+        raise ValueError(f"Неизвестный формат: {format_name}")
+
 
 def main():
     parser = argparse.ArgumentParser(
@@ -23,13 +32,18 @@ def main():
     )
     parser.add_argument('filepath1', help='Path to the first file')
     parser.add_argument('filepath2', help='Path to the second file')
+    parser.add_argument(
+        '--format',
+        help='Формат вывода (stylish, plain)',
+        default='stylish'
+    )
     args = parser.parse_args()
-
     try:
-        diff_result = generate_diff(args.filepath1, args.filepath2)
+        diff_result = generate_diff(args.filepath1, args.filepath2, args.format)
         print(diff_result)
     except Exception as e:
         print(f"Error: {e}")
+
 
 if __name__ == "__main__":
     main()

@@ -15,3 +15,7 @@ https://asciinema.org/a/EqWGtrY3rQPNsej209zx6zNd3
 
 Аскинема с рекурсивным сравнением файлов json и yaml
 https://asciinema.org/a/uXKUwfREIRo0cm5a57HqbKQ7v
+
+Аскинема с выводом плоского результата
+https://asciinema.org/a/2aHjtlvgMGDkCgrQt5ZxDUaXN
+[![asciicast](https://asciinema.org/a/2aHjtlvgMGDkCgrQt5ZxDUaXN.svg)](https://asciinema.org/a/2aHjtlvgMGDkCgrQt5ZxDUaXN)
