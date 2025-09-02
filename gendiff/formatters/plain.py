@@ -16,6 +16,25 @@ def format_diff(diff):
         else:
             return str(value)
 
+    def handle_added(item, current_path):
+        value_str = to_str(item["value"])
+        lines.append(
+            (
+                f"Property '{current_path}' was added with value: "
+                f"{value_str}"
+            )
+        )
+
+    def handle_removed(current_path):
+        lines.append(f"Property '{current_path}' was removed")
+
+    def handle_changed(item, current_path):
+        old_value_str = to_str(item["old_value"])
+        new_value_str = to_str(item["new_value"])
+        lines.append(
+            f"Property '{current_path}' was updated. From {old_value_str} to {new_value_str}"
+        )
+
     def iter_diff(items, path=""):
         for item in items:
             key = item["key"]
@@ -23,22 +42,11 @@ def format_diff(diff):
             current_path = build_path(path, key)
 
             if status == "added":
-                value_str = to_str(item["value"])
-                lines.append(
-                    f"Property '{current_path}' was added with value: {value_str}"
-                )
+                handle_added(item, current_path)
             elif status == "removed":
-                lines.append(f"Property '{current_path}' was removed")
+                handle_removed(current_path)
             elif status == "changed":
-                old_value_str = to_str(item["old_value"])
-                new_value_str = to_str(item["new_value"])
-
-                # Разбиваем длинную строку на части
-                line_part1 = (
-                    f"Property '{current_path}' was updated. From "
-                    f"{old_value_str} to {new_value_str}"
-                )
-                lines.append(line_part1)
+                handle_changed(item, current_path)
             elif status == "nested":
                 iter_diff(item["children"], current_path)
 
