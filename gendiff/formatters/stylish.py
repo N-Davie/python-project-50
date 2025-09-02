@@ -33,26 +33,30 @@ def format_diff(diff, indent=0):
     indent_str = " " * indent
 
     for item in diff:
-        key = item['key']
-        status = item['status']
+        key = item["key"]
+        status = item["status"]
 
-        if status == 'added':
-            val_str = to_str(item['value'], indent + 4)
+        if status == "added":
+            val_str = to_str(item["value"], indent + 4)
             lines.append(f"{indent_str}  + {key}: {val_str} # Добавлена")
-        elif status == 'removed':
-            val_str = to_str(item['value'], indent + 4)
+        elif status == "removed":
+            val_str = to_str(item["value"], indent + 4)
             lines.append(f"{indent_str}  - {key}: {val_str} # Удалена")
-        elif status == 'changed':
-            old_val_str = to_str(item['old_value'], indent + 4)
-            new_val_str = to_str(item['new_value'], indent + 4)
-            lines.append(f"{indent_str}  - {key}: {old_val_str} # Старое значение")
-            lines.append(f"{indent_str}  + {key}: {new_val_str} # Новое значение")
-        elif status == 'unchanged':
-            val_str = to_str(item['value'], indent + 4)
+        elif status == "changed":
+            old_val_str = to_str(item["old_value"], indent + 4)
+            new_val_str = to_str(item["new_value"], indent + 4)
+            lines.append(
+                f"{indent_str}  - {key}: {old_val_str} # Старое значение"
+            )
+            lines.append(
+                f"{indent_str}  + {key}: {new_val_str} # Новое значение"
+            )
+        elif status == "unchanged":
+            val_str = to_str(item["value"], indent + 4)
             lines.append(f"{indent_str}    {key}: {val_str}")
-        elif status == 'nested':
+        elif status == "nested":
             lines.append(f"{indent_str}    {key}: {{")
-            lines.extend(format_diff(item['children'], indent + 4))
+            lines.extend(format_diff(item["children"], indent + 4))
             lines.append(f"{indent_str}    }}")
 
     return lines
