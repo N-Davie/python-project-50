@@ -230,3 +230,51 @@ def test_main_handles_exception(monkeypatch, capsys, tmp_path):
     gendiff.main()
     out, _ = capsys.readouterr()
     assert "Error:" in out
+
+
+# --- Тесты для json-форматтера ---
+
+def test_generate_diff_json_format(tmp_path):
+    file1 = tmp_path / "f1.json"
+    file2 = tmp_path / "f2.json"
+    file1.write_text(json.dumps({"x": 1}))
+    file2.write_text(json.dumps({"x": 2, "y": 3}))
+
+    result = gendiff.generate_diff(str(file1), str(file2), format_name="json")
+
+    parsed = json.loads(result)
+    assert isinstance(parsed, list)
+    keys = {item["key"] for item in parsed}
+    assert "x" in keys
+    assert "y" in keys
+
+def test_generate_diff_json_nested(tmp_path):
+    file1 = tmp_path / "f1.json"
+    file2 = tmp_path / "f2.json"
+    file1.write_text(json.dumps({"a": {"b": 1}}))
+    file2.write_text(json.dumps({"a": {"b": 2}}))
+
+    result = gendiff.generate_diff(str(file1), str(file2), format_name="json")
+    parsed = json.loads(result)
+
+    assert parsed[0]["key"] == "a"
+    assert parsed[0]["status"] == "nested"
+    assert isinstance(parsed[0]["children"], list)
+    assert parsed[0]["children"][0]["status"] == "changed"
+
+def test_main_with_json(monkeypatch, tmp_path, capsys):
+    file1 = tmp_path / "f1.json"
+    file2 = tmp_path / "f2.json"
+    file1.write_text(json.dumps({"a": 1}))
+    file2.write_text(json.dumps({"a": 2}))
+
+    monkeypatch.setattr(sys, "argv", ["gendiff", str(file1), str(file2), "--format", "json"])
+    gendiff.main()
+    out, _ = capsys.readouterr()
+
+    parsed = json.loads(out)
+    assert isinstance(parsed, list)
+    assert parsed[0]["key"] == "a"
+    assert parsed[0]["status"] == "changed"
+
+

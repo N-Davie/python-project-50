@@ -18,3 +18,6 @@ https://asciinema.org/a/uXKUwfREIRo0cm5a57HqbKQ7v
 
 Аскинема с выводом плоского результата
 https://asciinema.org/a/2aHjtlvgMGDkCgrQt5ZxDUaXN
+
+Аскинема с выводом результата в json
+https://asciinema.org/a/2N2fjNELzWp3t2QYdft8C4xst
