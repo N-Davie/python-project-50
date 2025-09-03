@@ -5,9 +5,9 @@ import argparse
 from .load import load_data
 from .diff_builder import build_diff
 
-from .formatters.stylish import format_diff_output as format_stylish
-from .formatters.plain import format_diff as format_plain
-from .formatters.json import format_diff as format_json
+from gendiff.formatters.stylish import format_diff_output as format_stylish
+from gendiff.formatters.plain import format_diff as format_plain
+from gendiff.formatters.json import format_diff as format_json
 
 
 def generate_diff(file_path1, file_path2, format_name="stylish"):
