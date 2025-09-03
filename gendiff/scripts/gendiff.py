@@ -38,7 +38,9 @@ def main():
     parser.add_argument("filepath1", help="Path to the first file")
     parser.add_argument("filepath2", help="Path to the second file")
     parser.add_argument(
-        "--format", help="Формат вывода (stylish, plain)", default="stylish"
+        "-f", "--format",
+        help="Формат вывода (stylish, plain, json)",
+        default="stylish"
     )
     args = parser.parse_args()
     try:
