@@ -4,10 +4,10 @@ import json
 import tempfile
 import sys
 
-from gendiff import load
-from gendiff import diff_builder
+from gendiff.scripts import load
+from gendiff.scripts import diff_builder
 from gendiff.formatters import stylish
-from gendiff import gendiff
+from gendiff.scripts import gendiff
 
 yaml = load.yaml
 try:
