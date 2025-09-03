@@ -166,8 +166,8 @@ def test_to_str_dict_and_list():
     assert "a: 1" in s
     assert "c: 2" in s
 
-    l = [1, 2, {"a": 3}]
-    s = stylish.to_str(l)
+    lst = [1, 2, {"a": 3}]
+    s = stylish.to_str(lst)
     assert "1" in s
     assert "3" in s
 
