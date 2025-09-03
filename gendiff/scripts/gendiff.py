@@ -2,8 +2,8 @@
 
 import argparse
 
-from scripts.load import load_data
-from scripts.diff_builder import build_diff
+from .load import load_data
+from .diff_builder import build_diff
 
 from .formatters.stylish import format_diff_output as format_stylish
 from .formatters.plain import format_diff as format_plain
