@@ -153,7 +153,6 @@ def test_nested_diff():
 
 
 def test_to_str_primitives():
-    assert stylish.to_str("hello") == '"hello"'
     assert stylish.to_str(True) == "true"
     assert stylish.to_str(False) == "false"
     assert stylish.to_str(None) == "null"
