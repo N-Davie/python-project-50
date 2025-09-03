@@ -1,6 +1,4 @@
-# gendiff/formatters/stylish.py
-
-def to_str(value, depth):
+def to_str(value, depth=0):
     indent = ' ' * (depth * 4)
     if isinstance(value, dict):
         lines = []
@@ -14,6 +12,8 @@ def to_str(value, depth):
         return "false"
     if value is None:
         return "null"
+    if isinstance(value, str):
+        return f'"{value}"'  # строки в кавычках
     return str(value)
 
 
