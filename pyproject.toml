@@ -23,7 +23,7 @@ dev = [
 ]
 
 [project.scripts]
-gendiff = "gendiff.gendiff:main"
+gendiff = "gendiff.scripts.gendiff:main"
 
 [tool.ruff]
 line-length = 80
