@@ -1,8 +1,9 @@
 def to_str(value, depth=0):
+    """Конвертирует значение в строку с правильными отступами."""
     indent = ' ' * (depth * 4)
     if isinstance(value, dict):
         if not value:
-            return "{}"
+            return '{}'
         lines = []
         for k, v in value.items():
             lines.append(f"{indent}    {k}: {to_str(v, depth + 1)}")
@@ -13,10 +14,11 @@ def to_str(value, depth=0):
         return "false"
     if value is None:
         return "null"
-    return str(value)  # строки теперь без кавычек
+    return str(value)
 
 
 def format_diff(diff, depth=0):
+    """Форматирует дерево diff в стиль 'stylish'."""
     lines = []
     indent = ' ' * (depth * 4)
     for item in diff:
@@ -46,5 +48,5 @@ def format_diff(diff, depth=0):
 
 
 def format_diff_output(diff):
-    """Главная функция для stylish, возвращает строку всего diff."""
+    """Главная функция для вывода stylish diff."""
     return "{\n" + format_diff(diff, 0) + "\n}"
